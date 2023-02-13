@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+
+    <title>
+      SOP eSup cases
+    </title>
+
+
+    <style>
+      h1 {
+        text-align: center;
+        font-size: 32px;
+        font-weight: bold;
+      }
+      h2 {
+        text-align:left ;
+        font-size: 24px;
+        font-weight: bold;
+
+      }
+
+      h3 {
+        text-align: center;
+        font-size: 24px;
+        font-weight: bold;
+      }
+
+      p {
+        text-align: center;
+        font-size: 18px;
+      }
+      body {
+        display: flex;
+        color: black;
+        flex-direction: column;
+        align-items: center;
+        background-color: white;
+        border: solid 5px #A9B758;
+        padding: 25px;
+        border-radius: 8%;
+        
+      }
+      .box-center {
+        width: 50%;
+        margin: 0 auto;
+        text-align: left;
+        color: #ffffff;
+        background-color: #15171A;
+        border-radius: 30px;
+        border: solid;
+        border-color: #A9B758;
+        background-color: #62666a;
+        border-width: 5px;
+        margin-top: 10%;
+              
+      }
+
+      .analyze-case-button{
+        padding: 15px;
+        border-radius: 25px;
+        border: solid;
+        border-color: #A9B758;
+        background-color: #62666a;
+        margin-top: 3%;
+        margin-bottom: 5px;
+        color: #ffffff;
+        font-size: medium;
+        font-weight: bold;
+        font-family: Verdana, Geneva, Tahoma, sans-serif;
+        border-width: 5px;
+        width: 150px;
+        
+      }
+
+      .analyze-case-button:hover {
+
+        cursor: pointer;
+        transition: 0.5s;
+        border-color: #62666a;
+        background-color: #A9B758;
+      }
+
+      .qa, .qb, .qc, .qd, .qe {
+        margin-top: 4px;
+        margin-bottom: 4px;
+        
+      }
+
+      .heading {
+        background-color: #62666a;
+        width: 100%;
+        color: #ffffff;
+        border: solid;
+        border-color: #A9B758;
+        border-width: 5px;
+        border-radius: 10%;
+      }
+
+
+    </style>
+  </head>
+  <body>
+    <div class="heading" >
+      <h1>SOP for handling a salesforce case</h1>
+    </div>
+    
+    <h2>Hello Rajendran,</h2>
+    <p>When a case is assigned to you, please follow the below procedures step by step.</p>
+    <label for="read-problem-desc">
+
+        <input type="checkbox" id="read-problem-desc">Read the problem descriptions atleast two times
+      </label>
+      <br><br>
+      <div class="box" id="box" style="display: none;">
+        <div class="qa" id="part-2-question" style="display:block;">
+          a. What is the request type? 
+          <select id="request-type">
+            <option value="License extension">License extension</option>
+            <option value="License deactivation from customer">License deactivation from customer</option>
+            <option value="License deactivation from licensing team">License deactivation from licensing team</option>
+            <option value="License upgrade">License upgrade</option>
+            <option value="License question">License question</option>
+            <option value="License trade-in(Local to network)">License trade-in(Local to network)</option>
+            <option value="Product case">Product case</option>
+          </select>
+          <br><br>
+        </div>
+        <div class="qb">
+        b. Who is the request from? 
+        <input type="text" id="request-from">
+        <br><br>
+        </div>
+        <div class="qc">
+        c. Who should I check with? 
+        <select id="check-with">
+          <option value="Check with Rajesh">Check with Rajesh</option>
+          <option value="Check with colleagues">Check with colleagues</option>
+          <option value="Check with others">Check with others</option>
+        </select>
+        </div>
+        <br><br>
+        <div id="colleague-input" style="display:none;">
+          Name the colleague: 
+          <input type="text" id="colleague-name" placeholder="Name the colleague">
+          <br><br>
+        </div>
+        <div id="other-input" style="display:none;">
+          Name the contact person: 
+          <input type="text" id="contact-person-name" placeholder="Name the contact person">
+          <br><br>
+        </div>
+        <div class="qd">
+        <label for="next-action">d. What action should I take next?</label>
+        <select id="next-action" name="next-action">
+          <option value="send-email-inside-sales">Send an email to inside sales</option>
+          <option value="send-email-sales-team">Send email to sales team</option>
+          <option value="send-email-customer">Send an email back to customer</option>
+          <option value="send-email-licensing-team">Send an email to licensing team</option>
+          <option value="send-email-order-handler">Send an email to order handler</option>
+          <option value="send-email-esko-store">Send an email to Esko Store</option>
+          <option value="log-it-ticket">Log an IT ticket</option>
+        </select>
+        </div>
+        <div class="qe">
+        <label for="problem-description">e. Give a short description of the problem in your own words.</label>
+        <textarea id="problem-description"></textarea>
+        </div>
+      </div>
+
+      <button type="submit" class="analyze-case-button">SUBMIT</button>
+      <br>
+      <br>
+      <br>
+      <br>
+      <div class="box-center" style="display: none;">
+        <h3>CASE ANALYSIS</h3>
+
+        <p id="case-analysis">
+          This is a request for <span id="request-from"></span> from <span id="name"></span> stating that "<span id="problem-description"></span>". The next step is to <span id="check-with"></span> and I have to <span id="next-step"></span>
+        </p>
+      </div>
+      
+
+    <script>
+      document.querySelector("#read-problem-desc").addEventListener("change", function() {
+        if (this.checked) {
+          document.querySelector("#box").style.display = "block";
+        } else {
+          document.querySelector("#box").style.display = "none";
+        }
+      });
+      
+      document.querySelector("#check-with").addEventListener("change", function() {
+        if (this.value === "Check with colleagues") {
+          document.querySelector("#colleague-input").style.display = "block";
+        } else {
+          document.querySelector("#colleague-input").style.display = "none";
+        }
+      
+        if (this.value === "Check with others") {
+          document.querySelector("#other-input").style.display = "block";
+        } else {
+          document.querySelector("#other-input").style.display = "none";
+        }
+      });
+      
+    
+     document.querySelector("button").addEventListener("click", function() {
+    let requestType = document.querySelector("#request-type").value;
+    let requestFrom = document.querySelector("#request-from").value;
+    let checkWith = document.querySelector("#check-with").value;
+    let colleagueName = document.querySelector("#colleague-name").value;
+    let contactPersonName = document.querySelector("#contact-person-name").value;
+    let nextAction = document.querySelector("#next-action").value;
+    let problemDescription = document.querySelector("#problem-description").value;
+  
+    let checkWithMessage = checkWith;
+    if (checkWith === "Check with colleagues") {
+      checkWithMessage = checkWith + ": " + colleagueName;
+    } else if (checkWith === "Check with others") {
+      checkWithMessage = checkWith + ": " + contactPersonName;
+    }
+
+    document.querySelector("#case-analysis").innerHTML =
+      "This is a request for " + requestType + " from " + requestFrom + " stating that \"" + problemDescription +
+      "\". The next step is to " + (document.querySelector("#check-with").value === "Check with colleagues" ? 
+      "check with " + document.querySelector("#colleague-name").value : 
+      (document.querySelector("#check-with").value === "Check with others" ? 
+      "check with " + document.querySelector("#contact-person-name").value : 
+      checkWith)) + " and I have to " + nextAction + ".";
+  });
+
+    document.querySelector('.analyze-case-button').addEventListener('click', function() {
+   // document.querySelector('.box-center').style.display = 'block';
+
+    if (!document.getElementById("problem-description").value) {
+    alert("Please fill in the description.");
+    }
+    else {
+    document.querySelector('.box-center').style.display = 'block'
+    }
+
+
+  });
+
+
+  </script>    
+  </body>
+</html>
